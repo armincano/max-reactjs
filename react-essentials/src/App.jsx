@@ -27,28 +27,28 @@ function App() {
 		);
 	}
 
+	const ulCoreConcepts = CORE_CONCEPTS.map((coreConcept, index) => <CoreConcept key={index} {...coreConcept} />);
+
+	const tabButtons = Object.keys(EXAMPLES).map((topic, index) => (
+		<TabButton key={index} isSelected={selectedTopic === topic} onClick={() => handleClick(topic)}>
+			{EXAMPLES[topic].title}
+		</TabButton>
+	));
+
 	return (
 		<div>
 			<Header />
 			<main>
 				<section id="core-concepts">
 					<ul>
-						<CoreConcept {...CORE_CONCEPTS[0]} />
-						<CoreConcept {...CORE_CONCEPTS[1]} />
-						<CoreConcept {...CORE_CONCEPTS[2]} />
-						<CoreConcept {...CORE_CONCEPTS[3]} />
+						{ulCoreConcepts}
 					</ul>
 				</section>
 				<h2>Time to get started!</h2>
 				<section id="examples">
 					<h2>Examples</h2>
 					<menu>
-						<TabButton isSelected={selectedTopic === 'components'} onClick={() => handleClick("components")}>
-							Components
-						</TabButton>
-						<TabButton isSelected={selectedTopic === 'jsx'} onClick={() => handleClick("jsx")}>JSX</TabButton>
-						<TabButton isSelected={selectedTopic === 'props'} onClick={() => handleClick("props")}>Props</TabButton>
-						<TabButton isSelected={selectedTopic === 'state'} onClick={() => handleClick("state")}>State</TabButton>
+						{tabButtons}
 					</menu>
 					<div id="tab-content">{tabContent}</div>
 				</section>
